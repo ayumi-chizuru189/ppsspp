@@ -161,13 +161,7 @@ namespace MIPSDis
 		off += imm + 4;
 
 		const char *name = MIPSGetName(op);
-		int o = op>>26;
-		if (o==4 && rs == rt)//beq
-			sprintf(out, "b\t->$%08x", off);
-		else if (o==20 && rs == rt)//beql
-			sprintf(out, "bl\t->$%08x", off);
-		else
-			sprintf(out, "%s\t%s, %s, ->$%08x", name, RN(rs), RN(rt), off);
+		sprintf(out, "%s\t%s, %s, ->$%08x", name, RN(rs), RN(rt), off);
 	}
 
 	void Dis_IType(MIPSOpcode op, char *out)
@@ -200,10 +194,7 @@ namespace MIPSDis
 		int rt = _RT;
 		int rs = _RS;
 		const char *name = MIPSGetName(op);
-		if (rs == 0)
-			sprintf(out, "li\t%s, 0x%X",RN(rt),uimm);
-		else
-			sprintf(out, "%s\t%s, %s, 0x%X",name,RN(rt),RN(rs),uimm);
+		sprintf(out, "%s\t%s, %s, 0x%X",name,RN(rt),RN(rs),uimm);
 	}
 
 	void Dis_IType1(MIPSOpcode op, char *out)
@@ -216,13 +207,7 @@ namespace MIPSDis
 
 	void Dis_addi(MIPSOpcode op, char *out)
 	{
-		int imm = (signed short)(op&0xFFFF);
-		int rt = _RT;
-		int rs = _RS;
-		if (rs == 0)
-			sprintf(out, "li\t%s, %s",RN(rt),SignedHex(imm));
-		else
-			Dis_IType(op,out);
+		Dis_IType(op,out);
 	}
 
 	void Dis_ITypeMem(MIPSOpcode op, char *out)
@@ -257,14 +242,7 @@ namespace MIPSDis
 		int rs = _RS;
 		int rd = _RD;
 		const char *name = MIPSGetName(op);
-		if (rs==0 && rt==0)
-			sprintf(out,"li\t%s, 0",RN(rd));
-		else if (rs == 0)
-			sprintf(out,"move\t%s, %s",RN(rd),RN(rt));
-		else if (rt == 0)
-			sprintf(out,"move\t%s, %s",RN(rd),RN(rs));
-		else
-			sprintf(out, "%s\t%s, %s, %s",name,RN(rd),RN(rs),RN(rt));
+		sprintf(out, "%s\t%s, %s, %s",name,RN(rd),RN(rs),RN(rt));
 	}
 
 	void Dis_ShiftType(MIPSOpcode op, char *out)
