@@ -16,6 +16,7 @@
 // https://github.com/hrydgard/ppsspp and http://www.ppsspp.org/.
 
 #include <cstring>
+#include "Core/Config.h"
 #include "Core/HLE/HLE.h"
 #include "Core/MemMap.h"
 #include "Core/MIPS/MIPS.h"
