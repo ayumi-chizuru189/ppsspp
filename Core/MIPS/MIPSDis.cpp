@@ -46,7 +46,7 @@ namespace MIPSDis
 	{
 		static char temp[32];
 		int offset = 0;
-		if (i < 0)
+		if (i < 0 && g_Config.bForceUnsignedHex)
 		{
 			temp[0] = '-';
 			offset = 1;

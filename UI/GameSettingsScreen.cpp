@@ -1804,6 +1804,7 @@ void DeveloperToolsScreen::CreateViews() {
 	list->Add(new Choice(dev->T("JIT debug tools")))->OnClick.Handle(this, &DeveloperToolsScreen::OnJitDebugTools);
 	list->Add(new CheckBox(&g_Config.bShowDeveloperMenu, dev->T("Show Developer Menu")));
 	list->Add(new CheckBox(&g_Config.bDumpDecryptedEboot, dev->T("Dump Decrypted Eboot", "Dump Decrypted EBOOT.BIN (If Encrypted) When Booting Game")));
+	list->Add(new CheckBox(&g_Config.bForceUnsignedHex, dev->T("Force Unsigned Hex")));
 
 #if !PPSSPP_PLATFORM(UWP)
 	Choice *cpuTests = new Choice(dev->T("Run CPU Tests"));
